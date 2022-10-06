@@ -431,6 +431,7 @@ class ShutterRow extends s {
                         icon = "lsr:shutter-2";
                 else if (this.getPosition() <= 75 )
                         icon = (this.config.invert_position_label) ? "lsr:shutter-3" : "lsr:shutter-1"
+                else icon = "lsr:shutter-4" 
             }
         }
 
