@@ -87,6 +87,45 @@ SANCTIONED_UNITS.map(function (unit) {
     return unit.replace(/^(.*?)-/, '');
 });
 
+const LSR_SHUTTER_ICONS_MAP = {
+    
+  "shutter-0":
+    "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8",
+
+  "shutter-1":
+    "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9M8",
+    
+  "shutter-2":
+    "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9M8 12H16V14H8V12M8",
+
+  "shutter-3":
+    "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9M8 12H16V14H8V12M8 15H16V17H8V15M8",
+
+  "shutter-4":
+    "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9M8 12H16V14H8V12M8 15H16V17H8V15M8 18H16V20H8V18Z",
+
+  "shutter-closing":
+    "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M10 9 H14 V15 H16 L12 19 L 8 15 H10 Z",
+
+  "shutter-opening":
+    "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M10 19 H14 V13 H16 L12 9 L8 13 H10 Z",
+
+};
+
+async function getIcon(name) {
+  var lsrPath = LSR_SHUTTER_ICONS_MAP[name];
+  return {
+    path: lsrPath,
+    viewBox: "0 0 24 24"
+  };
+return { path: LSR_SHUTTER_ICONS_MAP[name] };
+}
+
+window.customIconsets = window.customIconsets || {};
+window.customIconsets["lsr"] = getIcon;
+
+
+
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -378,10 +417,23 @@ class ShutterRow extends s {
         else {
             // Use dynamic icon
             if(this.downReached())
-                icon = "mdi:window-shutter";
-            else
-                icon = "mdi:window-shutter-open";
+                icon = "lsr:shutter-4";
+            else if(this.upReached())
+                icon = "lsr:shutter-0";
+            else if(this.stateDisplay == "opening")
+                icon = "lsr:shutter-opening";
+            else if(this.stateDisplay == "closing")
+                icon = "lsr:shutter-closing";
+            else {
+                if (this.getPosition() <= 25)
+                        icon = (this.config.invert_position_label) ? "lsr:shutter-1" : "lsr:shutter-3";
+                else if (this.getPosition() <= 50 )
+                        icon = "lsr:shutter-2";
+                else if (this.getPosition() <= 75 )
+                        icon = (this.config.invert_position_label) ? "lsr:shutter-3" : "lsr:shutter-1"
+            }
         }
+
         return y`<ha-icon icon="${icon}" class="${(this.config.state_color != undefined && this.config.state_color && this.stateDisplay != "closed") ? "active-icon" : ""}"></ha-icon>`;
     }
     renderFirstRow() {
