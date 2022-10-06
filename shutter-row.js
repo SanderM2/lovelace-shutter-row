@@ -445,9 +445,9 @@ class ShutterRow extends s {
                 
                 <span class="entity-name" @click="${this.moreInfo}">${this.getName()}</span>
                 <div class="controls" state="${this.stateDisplay}">
-                    <ha-icon icon="mdi:chevron-up" class="${this.config.state_confidence && (this.upReached() || this.stateDisplay == "opening") ? "disabled" : ''}" @dblclick="${this.onMoveUpDoubleClick}" @pointerdown="${onHoldPointerDown}" @pointerup="${this.onMoveUpPointerUp}"></ha-icon>
-                    <ha-icon icon="mdi:stop" class="${this.config.state_confidence && (this.stateDisplay == "open" || this.stateDisplay == "closed") ? "disabled" : ''}" @dblclick="${this.onMoveStopDoubleClick}" @pointerdown="${onHoldPointerDown}" @pointerup="${this.onMoveStopPointerUp}"></ha-icon>
-                    <ha-icon icon="mdi:chevron-down" class="${this.config.state_confidence && (this.downReached() || this.stateDisplay == "closing") ? "disabled" : ''}" @dblclick="${this.onMoveDownDoubleClick}" @pointerdown="${onHoldPointerDown}" @pointerup="${this.onMoveDownPointerUp}"></ha-icon>
+                    <ha-icon icon="mdi:arrow-up-bold-circle-outline" class="${this.config.state_confidence && (this.upReached() || this.stateDisplay == "opening") ? "disabled" : ''}" @dblclick="${this.onMoveUpDoubleClick}" @pointerdown="${onHoldPointerDown}" @pointerup="${this.onMoveUpPointerUp}"></ha-icon>
+                    <ha-icon icon="mdi:stop-circle-outline" class="${this.config.state_confidence && (this.stateDisplay == "open" || this.stateDisplay == "closed") ? "disabled" : ''}" @dblclick="${this.onMoveStopDoubleClick}" @pointerdown="${onHoldPointerDown}" @pointerup="${this.onMoveStopPointerUp}"></ha-icon>
+                    <ha-icon icon="mdi:arrow-down-bold-circle-outline" class="${this.config.state_confidence && (this.downReached() || this.stateDisplay == "closing") ? "disabled" : ''}" @dblclick="${this.onMoveDownDoubleClick}" @pointerdown="${onHoldPointerDown}" @pointerup="${this.onMoveDownPointerUp}"></ha-icon>
                 </div>
             </div>
         `;
